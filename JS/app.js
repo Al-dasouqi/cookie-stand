@@ -20,7 +20,7 @@ let Seattle = {
 
   calcCustomersEachHour: function () {
       for (let i = 0; i < salesHours.length; i++){
-          this.customersEachHour[i].push(randomNumber(this.minCustomers, this.maxCustomers));
+          this.customersEachHour.push(randomNumber(this.minCustomers, this.maxCustomers));
       }
         },
   calCookiesEachHour: function () {
@@ -59,7 +59,7 @@ let Seattle = {
 Seattle.calcCustomersEachHour();
 Seattle.calCookiesEachHour();
 Seattle.render();
-console.log(Seattle);
+console.log(Seattle); 
 
 //Tokyo
 let tokyo = {
@@ -73,7 +73,7 @@ let tokyo = {
 
 calcCustomersEachHour: function () {
     for (let i = 0; i < salesHours.length; i++){
-        this.customersEachHour[i].push(randomNumber(this.minCustomers, this.maxCustomers));
+        this.customersEachHour.push(randomNumber(this.minCustomers, this.maxCustomers))
     }
       },
 calCookiesEachHour: function () {
@@ -127,7 +127,7 @@ let Dubai= {
 
   calcCustomersEachHour: function () {
     for (let i = 0; i < salesHours.length; i++){
-        this.customersEachHour[i].push(randomNumber(this.minCustomers, this.maxCustomers));
+        this.customersEachHour.push(randomNumber(this.minCustomers, this.maxCustomers));
     }
       },
 calCookiesEachHour: function () {
@@ -149,14 +149,14 @@ render:function(){
   let ulElement=document.createElement('ul');
   parent3.appendChild(ulElement);
 
-  for(let i =0; i < Seattle.salesHours.length;i++){
-    let liElement=document.createElement('li');
+  for(let i =0; i < salesHours.length;i++){
+    let liElement         = document.createElement('li');
     ulElement.appendChild(liElement);
-    liElement.textContent=`${salesHours[i]}  : ${this.cookiesEachHour[i]}`;
+    liElement.textContent =`${salesHours[i]}  : ${this.cookiesEachHour[i]}`;
   
   }
 
-  let totalElement=document.createElement("li");
+  let totalElement = document.createElement("li");
   ulElement.appendChild(totalElement);
   totalElement.textContent= `total = ${this.total} cookies`;
 
@@ -182,7 +182,7 @@ let paris= {
 
   calcCustomersEachHour: function () {
     for (let i = 0; i < salesHours.length; i++){
-        this.customersEachHour[i].push(randomNumber(this.minCustomers, this.maxCustomers));
+        this.customersEachHour.push(randomNumber(this.minCustomers, this.maxCustomers));
     }
       },
 calCookiesEachHour: function () {
@@ -194,17 +194,17 @@ calCookiesEachHour: function () {
 
 render:function(){
   //get the parent by its ID:
-  let parent= document.getElementById('parent');
-  console.log(parent);
+  let parent4= document.getElementById('parent4');
+  console.log(parent4);
 
   let h2Element=document.createElement('h2');
-  parent.appendChild(h2Element);
+  parent4.appendChild(h2Element);
   h2Element.textContent=this.location;
 
   let ulElement=document.createElement('ul');
-  parent.appendChild(ulElement);
+  parent4.appendChild(ulElement);
 
-  for(let i =0; i < Seattle.salesHours.length;i++){
+  for(let i =0; i < salesHours.length;i++){
     let liElement=document.createElement('li');
     ulElement.appendChild(liElement);
     liElement.textContent=`${salesHours[i]}  : ${this.cookiesEachHour[i]}`;
@@ -227,8 +227,8 @@ console.log(paris);
 //Lima
 let lima= {
   location: 'Lima',
-  customers: [],
-  cookies: [],
+  customersEachHour: [],
+  cookiesEachHour: [],
   avgCookies: 4.6 ,
   minCustomers: 2,
   maxCustomers:16 ,
@@ -236,8 +236,8 @@ let lima= {
 
   calcCustomersEachHour: function () {
     for (let i = 0; i < salesHours.length; i++){
-        this.customersEachHour[i].push(randomNumber(this.minCustomers, this.maxCustomers));
-    }
+      this.customersEachHour.push(randomNumber(this.minCustomers, this.maxCustomers));
+  }
     },
 calCookiesEachHour: function () {
     for (let i = 0; i < salesHours.length; i++) {
@@ -248,17 +248,17 @@ calCookiesEachHour: function () {
 
 render:function(){
   //get the parent by its ID:
-  let parent= document.getElementById('parent');
-  console.log(parent);
+  let parent5= document.getElementById('parent5');
+  console.log(parent5);
 
   let h2Element=document.createElement('h2');
-  parent.appendChild(h2Element);
+  parent5.appendChild(h2Element);
   h2Element.textContent=this.location;
 
   let ulElement=document.createElement('ul');
-  parent.appendChild(ulElement);
+  parent5.appendChild(ulElement);
 
-  for(let i =0; i < Seattle.salesHours.length;i++){
+  for(let i =0; i < salesHours.length;i++){
     let liElement=document.createElement('li');
     ulElement.appendChild(liElement);
     liElement.textContent=`${salesHours[i]}  : ${this.cookiesEachHour[i]}`;
