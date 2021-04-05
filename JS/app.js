@@ -1,5 +1,5 @@
 
-// Create array to include hours of operation.
+/* // Create array to include hours of operation.
 let salesHours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 
 //Create random num
@@ -275,6 +275,124 @@ render:function(){
 lima.calcCustomersEachHour();
 lima.calCookiesEachHour();
 lima.render();
-console.log(lima);
+console.log(lima); */
 
 
+let salesHours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
+
+//Create random num
+function randomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min +1 ) + min);
+}
+
+function Location(
+  locationName,
+  minCustomers,
+  maxCustomers,
+  avgCookies,
+  //customersEachHour[],
+  //cookiesEachHour[],
+) {
+  this.locationName      = locationName;
+  this.minCustomers      = minCustomers;
+  this.maxCustomers      = maxCustomers;
+  this.avgCookies        = avgCookies;
+  this.cookiesEachHour   = [];
+  this.customersEachHour = [];
+}
+
+//Cu Per Hour
+Location.prototype.cookiesPerHour = function() {
+  for (let i = 0; i < salesHours.length; i++) {
+    this.cookiesEachHour.push(randomNumber(this.minCustomers, this.maxCustomers));
+  }
+  return this.cookiesEachHour;
+};
+
+  Location.prototype.cookiesPerDay = function() {
+    let totalCookies = 0;
+    for (let i = 0; i < salesHours.length; i++) {
+      this.cookiesEachHour.push(Math.floor(this.customersEachHour[i]*this.avgCookies));
+      totalCookies += this.cookiesEachHour[i];
+    }
+    //this.cookiesEachHour.push(totalCookies);
+    return this.cookiesEachHour;
+  };
+  
+  //  render 
+  Location.prototype.render = function() {
+    let table               = document.getElementById('table');
+    let tableRow            = document.createElement('tr');
+    let tableData           = document.createElement('td');
+    tableData.textContent   = this.locationName;
+    table.appendChild(tableRow);
+    tableRow.appendChild(tableData);
+    for (let i = 0; i < salesHours.length; i++) {
+      let tableDataCookies = document.createElement('td');
+      tableDataCookies.textContent = this.cookiesEachHour[i];
+      tableRow.appendChild(tableDataCookies);
+    }
+  // table.appendChild(tableRow);
+  };
+
+   let seattle = new Location('Seattle', 23, 65, 6.3, []);
+   let tokyo   = new Location('Tokyo', 3, 24, 1.2, []);
+   let dubai   = new Location('Dubai', 11, 38, 3.7, []);
+   let paris   = new Location('Paris', 20, 38, 2.3, []);
+   let lima    = new Location('Lima', 2, 16, 4.6, []); 
+
+let cityArray = [seattle, tokyo, dubai, paris, lima];
+
+//  render sales hours information in table.
+function renderSalesHours() {
+  let tableHead     = document.getElementById('hours-table');
+  let hTableRow     = document.createElement('tr');
+  let hTable        = document.createElement('th');
+  hTableRow.appendChild(hTable);
+  for (let i = 0; i < salesHours.length; i++) {
+    let hTableData  = document.createElement('th');
+    hTableData.textContent = salesHours[i];
+    hTableRow.appendChild(hTableData);
+  }
+  let tableTotal         = document.createElement('th');
+  tableTotal.textContent = 'Daily Location Total';
+  hTableRow.appendChild(tableTotal);
+  tableHead.appendChild(hTableRow);
+}
+
+// daily sales totals on table row.
+function renderGlobalSalesTotals() {
+  let totalTable1     = document.getElementById('daily-total');
+  let totalTableRow   = document.createElement('tr');
+  let totalTableName  = document.createElement('td');
+  totalTableName.textContent = 'Totals';
+  totalTableRow.appendChild(totalTableName);
+  let globalTotal = 0;
+  for (let i = 0; i < salesHours.length; i++) {
+    var hourlyTotal = 0;
+    for (let j = 0; j < cityArray.length; j++) {
+      hourlyTotal += cityArray[j].cookiesEachHour[i];
+    }
+    let totalTableData = document.createElement('td');
+    totalTableData.textContent = hourlyTotal;
+    totalTableRow.appendChild(totalTableData);
+    globalTotal += hourlyTotal;
+  }
+  let grandTotalTableData = document.createElement('td');
+  grandTotalTableData.textContent = globalTotal;
+  totalTableRow.appendChild(grandTotalTableData);
+  totalTable1.appendChild(totalTableRow);
+}
+
+// Create function to loop through each City object to perform methods.
+function calcAndRenderSales() {
+  for (let i = 0; i < cityArray.length; i++) {
+    cityArray[i].cookiesPerHour();
+    cityArray[i].cookiesPerDay();
+    cityArray[i].render();
+  }
+}
+
+renderSalesHours();
+calcAndRenderSales();
+renderGlobalSalesTotals();
