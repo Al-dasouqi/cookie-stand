@@ -39,13 +39,26 @@
     <!-- <a href="index.html">Home</a> -->
     <main class="table-main">
       <h2>Sales Data By Location</h2>
-      <table>
+      <table id="store-table">
         <thead id="hours-table"></thead>
         <tbody id="table"></tbody>
         <tfoot id="daily-total"></tfoot>
       </table> 
     </main>
-
+    <form action="" id="add-city">
+      <fieldset>
+        <h3 id=area-sub-titles>New Cookie Stand</h3>
+        <label>  Location name            : <input name ="storeName" id ='input-name' type="text" required></label></br>
+        <label>  Minimum customers        : <input name ='minCust'   id ='input-min-cust' type="text" required></label></br>
+        <label>  Maximum customers        : <input name ='maxCust'   id ='input-max-cust' type="text"></label required></br>
+        <label>  Avg cookies per customer : <input name ='cookiesPerCustomer' id='input-avg-cookies' type="text" required></label></br>
+        <!-- <label>Opening time : <input name='openTime' id='input-new-store-data' type="text" required></label></br>
+        <label>Closing time : <input name='closeTime' id='input-new-store-data' type="text" required></label></br> -->
+        <input id="submit" type = 'submit'>
+        <!-- <button id="button-clicker">Click here to change location</button> -->
+      </fieldset>
+    <!-- <input id="input-to-change" type='text'> -->
+    </form>
     <footer>
       Salmon Cookies
     </footer>

@@ -393,6 +393,42 @@ function calcAndRenderSales() {
   }
 }
 
+// renderSalesHours();
+// calcAndRenderSales();
+// renderGlobalSalesTotals();
+
+
+
+function newCityData(e) {
+  // Prevent default "submit" event propagation.
+  e.preventDefault();
+
+  // Pull values from form input fields.
+  let nameValue      = document.getElementById('input-name').value;
+  let minCustValue   = document.getElementById('input-min-cust').value;
+  let maxCustValue   = document.getElementById('input-max-cust').value;
+  let avgCookieValue = document.getElementById('input-avg-cookies').value;
+
+  let newCity = new Location(nameValue, minCustValue, maxCustValue, avgCookieValue);
+
+  newCity.cookiesPerHour();
+  newCity.cookiesPerDay();
+  newCity.render();
+  cityArray.push(newCity);
+
+  // Render
+  let totalTable = document.getElementById('daily-total');
+  totalTable.removeChild(totalTable.childNodes[0]);
+  renderGlobalSalesTotals();
+
+ 
+}
+
+let cityForm = document.getElementById('add-city');
+
+// Create event listener on form element "submit" event.
+cityForm.addEventListener('submit', newCityData);
+
 renderSalesHours();
 calcAndRenderSales();
 renderGlobalSalesTotals();
